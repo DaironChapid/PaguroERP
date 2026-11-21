@@ -48,7 +48,7 @@ El sistema está probado en **Windows 11**. En Mac o Linux funciona igual, salvo
 ## 4. Clonar y configurar
 
 ```bash
-git clone <url-del-repositorio> paguro-erp
+git clone https://github.com/DaironChapid/PaguroERP.git paguro-erp
 cd paguro-erp
 npm ci
 ```

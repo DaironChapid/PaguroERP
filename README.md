@@ -19,7 +19,7 @@ ERP interno de **Paguro Corp**. Hoy tiene un módulo, **Contabilidad**: lee los 
 Requisitos: Node.js 24, Google Cloud CLI y acceso a las cuentas del proyecto (ver `docs/INSTALACION.md`).
 
 ```bash
-git clone <url-del-repositorio> paguro-erp
+git clone https://github.com/DaironChapid/PaguroERP.git paguro-erp
 cd paguro-erp
 npm ci
 cp .env.example .env.local        # y completar los valores (ver INSTALACION.md)

@@ -28,9 +28,9 @@ Fuera de alcance por decisión: Inventario (oculto), n8n, reglas aprendidas, pub
 
 ## Pendiente
 ### Para entregar
-- [ ] Crear el repositorio privado en GitHub (`docs/INSTALACION.md` §13).
+- [x] Repositorio privado creado: https://github.com/DaironChapid/PaguroERP (falta dar acceso de administrador a Joseph).
 - [ ] Rotar la clave de Claude y pasarla a la organización de la empresa (§8).
-- [ ] Crear el usuario admin de Joseph: `npm run acceso -- joseph@pagurocorp.com admin "Joseph"`.
+- [x] Usuario admin de Joseph creado (joseph@pagurocorp.com).
 - [ ] Ajustar el control de sesión de Google Cloud para que la lectura del Drive no venza (§7).
 
 ### Datos (los gestiona el gerente)
