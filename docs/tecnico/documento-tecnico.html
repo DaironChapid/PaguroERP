@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Documento técnico · Paguro ERP</title>
+<style>
+  @page { size: Letter; margin: 17mm 16mm 19mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; color: #1f2328; font-size: 10pt; line-height: 1.48; margin: 0; }
+  h1 { font-size: 22pt; margin: 0 0 6pt; letter-spacing: -0.3pt; }
+  h2 { font-size: 14.5pt; margin: 0 0 8pt; padding-bottom: 4pt; border-bottom: 2px solid #2b79d8; break-after: avoid; }
+  h3 { font-size: 11pt; margin: 12pt 0 4pt; break-after: avoid; }
+  p { margin: 0 0 6pt; }
+  ul, ol { margin: 0 0 7pt; padding-left: 17pt; }
+  li { margin-bottom: 2.5pt; }
+  section { break-before: page; }
+  section.sigue { break-before: auto; margin-top: 16pt; }
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 9pt; font-size: 8.8pt; }
+  tr { break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 4pt 6pt; border-bottom: 1px solid #d8dee4; }
+  th { background: #f3f5f7; font-weight: 600; }
+  code { font-family: Consolas, monospace; font-size: 8.4pt; background: #f3f5f7; padding: 0 3pt; border-radius: 3px; }
+  pre { font-family: Consolas, monospace; font-size: 8.2pt; background: #f6f8fa; border: 1px solid #d8dee4; border-radius: 6px; padding: 7pt 9pt; margin: 4pt 0 9pt; line-height: 1.4; white-space: pre-wrap; break-inside: avoid; }
+  .nota { background: #eef5fd; border-left: 4px solid #2b79d8; padding: 6pt 10pt; margin: 7pt 0 9pt; border-radius: 0 6px 6px 0; break-inside: avoid; }
+  .alerta { background: #fdf4e3; border-left: 4px solid #c7821e; padding: 6pt 10pt; margin: 7pt 0 9pt; border-radius: 0 6px 6px 0; break-inside: avoid; }
+  .cifras { display: flex; gap: 7pt; margin: 8pt 0 10pt; }
+  .cifra { flex: 1; border: 1px solid #d0d7de; border-radius: 8px; padding: 7pt 8pt; background: #fafbfc; }
+  .cifra b { display: block; font-size: 15pt; color: #1f2328; line-height: 1.1; }
+  .cifra span { font-size: 8.3pt; color: #59636e; }
+  figure { margin: 6pt 0 10pt; break-inside: avoid; }
+  figcaption { font-size: 8.3pt; color: #59636e; text-align: center; margin-top: 3pt; }
+  svg text { font-family: "Segoe UI", sans-serif; }
+  .tubo { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6pt; margin: 6pt 0 10pt; }
+  .etapa { border: 1px solid #d0d7de; border-radius: 8px; padding: 6pt 8pt; background: #fafbfc; font-size: 8.6pt; break-inside: avoid; }
+  .etapa > b:first-child { display: block; color: #2b79d8; font-size: 9.2pt; margin-bottom: 1pt; }
+  .etapa.ia { background: #f3effc; border-color: #c9b8f0; } .etapa.ia > b:first-child { color: #6b3fd1; }
+  .etapa.humano { background: #fdf4e3; border-color: #ecd3a2; } .etapa.humano > b:first-child { color: #9a6200; }
+  .portada { height: 225mm; display: flex; flex-direction: column; justify-content: center; }
+  .portada .marca { font-size: 11pt; color: #2b79d8; font-weight: 600; letter-spacing: 1pt; text-transform: uppercase; margin-bottom: 10pt; }
+  .portada h1 { font-size: 30pt; }
+  .portada .sub { font-size: 13pt; color: #59636e; margin-bottom: 26pt; max-width: 150mm; }
+  .portada .datos { font-size: 9.5pt; color: #59636e; border-top: 1px solid #d0d7de; padding-top: 10pt; }
+  .dos { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .ok { color: #1d7a3a; font-weight: 600; } .no { color: #b42318; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <div class="marca">Paguro Corp</div>
+  <h1>Documento técnico y ejecutivo</h1>
+  <div class="sub">Paguro ERP · Módulo de Contabilidad. Qué se construyó, con qué tecnologías, cómo se conectan sus servicios, cómo trabaja la inteligencia artificial y qué se necesita para recibir el proyecto y seguir desarrollándolo.</div>
+  <div class="datos">
+    Versión 1.0 · 21 de noviembre de 2026<br>
+    Complementa: <b>Manual de uso</b> (uso diario) · <b>docs/INSTALACION.md</b> (pasos detallados y comandos) · <b>README.md</b> (mapa del código)
+  </div>
+</div>
+
+<!-- ───────────────────────────── 1 ───────────────────────────── -->
+<section>
+  <h2>1. Resumen ejecutivo</h2>
+  <p><b>El problema.</b> Los soportes contables de Paguro Corp (facturas, pagos a la DIAN, planillas, nómina, transferencias, importaciones) estaban dispersos en carpetas del Drive, sin un registro contable organizado ni una forma rápida de saber de dónde salía cada cifra.</p>
+  <p><b>La solución.</b> Un ERP propio, empezando por el módulo de Contabilidad. Se sigue usando el Drive como siempre: el sistema lo revisa solo cada 15 minutos, lee cada documento nuevo con inteligencia artificial (Claude), lo clasifica, valida las cifras y genera el asiento contable. Lo que tiene dudas queda en una bandeja para revisión humana. Con lo aprobado, arma los reportes contables, y cada cifra enlaza a su soporte en el Drive.</p>
+  <div class="cifras">
+    <div class="cifra"><b>41</b><span>documentos aprobados y contabilizados (carpeta 02_2026)</span></div>
+    <div class="cifra"><b>9</b><span>reportes contables con enlace a cada soporte</span></div>
+    <div class="cifra"><b>~9.600</b><span>tokens de IA por documento leído, en promedio</span></div>
+    <div class="cifra"><b>120 + 2</b><span>pruebas automáticas + pruebas de punta a punta</span></div>
+  </div>
+  <p><b>Estado.</b> Cumple los cinco requisitos de esta versión: manual de uso, sistema probado, contabilidad en un solo lugar, enlaces a las evidencias e IA que reconoce y categoriza. El código está listo para entregarse por un repositorio privado de GitHub: se verificó clonándolo desde cero, instalándolo y pasándole todas las pruebas.</p>
+
+  <h3>Qué necesita hacer el dueño para recibirlo</h3>
+  <ol>
+    <li><b>Recibir el repositorio privado de GitHub</b> como administrador.</li>
+    <li><b>Recibir el archivo de claves</b> (<code>.env.local</code>) por un canal seguro. No viaja con GitHub.</li>
+    <li><b>Crear una clave nueva de Claude</b> en la cuenta de la empresa y reemplazar la de desarrollo.</li>
+    <li><b>Ajustar el control de sesión de Google Cloud</b> en la consola de Google Workspace, para que la lectura del Drive no venza.</li>
+    <li><b>Ser dueño (Owner)</b> de las cuentas de Supabase, Google Cloud y Anthropic (sección 4).</li>
+  </ol>
+  <div class="nota">Los datos contables ya viven en la nube (Supabase): no se pierden al cambiar de computador ni al clonar el repositorio. Basta con conectar la copia nueva con las mismas claves.</div>
+</section>
+
+<!-- ───────────────────────────── 2 ───────────────────────────── -->
+<section>
+  <h2>2. Arquitectura</h2>
+  <p>La aplicación corre en el computador de la oficina. Los datos están en la nube, los documentos en Google Drive y la lectura inteligente la hace Claude por API.</p>
+  <figure>
+    <svg viewBox="0 0 680 330" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#57606a"/></marker>
+      </defs>
+      <!-- usuario -->
+      <rect x="10" y="135" width="120" height="60" rx="8" fill="#fff" stroke="#8c959f"/>
+      <text x="70" y="160" text-anchor="middle" font-size="12" font-weight="600">Navegador</text>
+      <text x="70" y="177" text-anchor="middle" font-size="10" fill="#57606a">localhost:3000</text>
+      <!-- app -->
+      <rect x="200" y="95" width="230" height="140" rx="10" fill="#eef5fd" stroke="#2b79d8" stroke-width="1.5"/>
+      <text x="315" y="118" text-anchor="middle" font-size="13" font-weight="700" fill="#1a5fb4">Paguro ERP (Next.js)</text>
+      <text x="315" y="134" text-anchor="middle" font-size="10" fill="#57606a">en el PC de la oficina</text>
+      <rect x="215" y="145" width="200" height="22" rx="5" fill="#fff" stroke="#b6d3f5"/>
+      <text x="315" y="160" text-anchor="middle" font-size="10">Pantallas y reportes</text>
+      <rect x="215" y="172" width="200" height="22" rx="5" fill="#fff" stroke="#b6d3f5"/>
+      <text x="315" y="187" text-anchor="middle" font-size="10">Reloj: revisa el Drive cada 15 min</text>
+      <rect x="215" y="199" width="200" height="22" rx="5" fill="#fff" stroke="#b6d3f5"/>
+      <text x="315" y="214" text-anchor="middle" font-size="10">Motor contable (reglas y asientos)</text>
+      <!-- drive -->
+      <rect x="500" y="10" width="170" height="64" rx="8" fill="#fff" stroke="#1d7a3a"/>
+      <text x="585" y="34" text-anchor="middle" font-size="12" font-weight="600">Google Drive</text>
+      <text x="585" y="51" text-anchor="middle" font-size="10" fill="#57606a">carpeta 02_2026</text>
+      <text x="585" y="65" text-anchor="middle" font-size="9" fill="#57606a">(solo lectura)</text>
+      <!-- claude -->
+      <rect x="500" y="96" width="170" height="56" rx="8" fill="#fff" stroke="#6b3fd1"/>
+      <text x="585" y="120" text-anchor="middle" font-size="12" font-weight="600">Claude API</text>
+      <text x="585" y="137" text-anchor="middle" font-size="10" fill="#57606a">lee PDF e imágenes</text>
+      <!-- supabase -->
+      <rect x="500" y="174" width="170" height="64" rx="8" fill="#fff" stroke="#3ecf8e" stroke-width="1.5"/>
+      <text x="585" y="198" text-anchor="middle" font-size="12" font-weight="600">Supabase (nube)</text>
+      <text x="585" y="214" text-anchor="middle" font-size="10" fill="#57606a">PostgreSQL · usuarios</text>
+      <text x="585" y="228" text-anchor="middle" font-size="9" fill="#57606a">permisos por fila (RLS)</text>
+      <!-- trm -->
+      <rect x="500" y="260" width="170" height="50" rx="8" fill="#fff" stroke="#8c959f"/>
+      <text x="585" y="281" text-anchor="middle" font-size="12" font-weight="600">datos.gov.co</text>
+      <text x="585" y="297" text-anchor="middle" font-size="10" fill="#57606a">TRM oficial (USD)</text>
+      <!-- google cloud -->
+      <rect x="250" y="12" width="180" height="50" rx="8" fill="#fff" stroke="#8c959f" stroke-dasharray="4 3"/>
+      <text x="340" y="33" text-anchor="middle" font-size="11" font-weight="600">Google Cloud IAM</text>
+      <text x="340" y="49" text-anchor="middle" font-size="9" fill="#57606a">robot lector-facturas (sin llave)</text>
+      <!-- github -->
+      <rect x="200" y="268" width="230" height="44" rx="8" fill="#fff" stroke="#8c959f" stroke-dasharray="4 3"/>
+      <text x="315" y="288" text-anchor="middle" font-size="11" font-weight="600">GitHub (repositorio privado)</text>
+      <text x="315" y="303" text-anchor="middle" font-size="9" fill="#57606a">código · no datos · no claves</text>
+      <!-- flechas -->
+      <line x1="130" y1="165" x2="198" y2="165" stroke="#57606a" marker-end="url(#f)"/>
+      <line x1="315" y1="95" x2="330" y2="64" stroke="#57606a" marker-end="url(#f)"/>
+      <line x1="430" y1="37" x2="498" y2="40" stroke="#57606a" marker-end="url(#f)"/>
+      <text x="463" y="30" text-anchor="middle" font-size="8.5" fill="#57606a">lee</text>
+      <line x1="430" y1="130" x2="498" y2="124" stroke="#57606a" marker-start="url(#f)" marker-end="url(#f)"/>
+      <text x="463" y="118" text-anchor="middle" font-size="8.5" fill="#57606a">archivo → datos</text>
+      <line x1="430" y1="200" x2="498" y2="205" stroke="#57606a" marker-start="url(#f)" marker-end="url(#f)"/>
+      <text x="463" y="196" text-anchor="middle" font-size="8.5" fill="#57606a">guarda / consulta</text>
+      <line x1="430" y1="225" x2="498" y2="282" stroke="#57606a" marker-end="url(#f)"/>
+      <line x1="315" y1="266" x2="315" y2="237" stroke="#8c959f" stroke-dasharray="3 3" marker-end="url(#f)"/>
+      <text x="340" y="256" font-size="8.5" fill="#57606a">código</text>
+    </svg>
+    <figcaption>Componentes y conexiones. Línea punteada: no intervienen en el uso diario (permisos y código).</figcaption>
+  </figure>
+  <ul>
+    <li><b>Una sola aplicación</b> (Next.js) contiene las pantallas, la API interna, el reloj de sincronización y el motor contable.</li>
+    <li><b>La base de datos es la fuente de verdad.</b> Documentos, asientos, usuarios y permisos viven en Supabase. Los permisos se aplican dentro de la base de datos, no solo en las pantallas.</li>
+    <li><b>El Drive nunca se modifica:</b> el sistema solo lo lee.</li>
+    <li><b>La IA solo interpreta.</b> Claude extrae datos del documento; las reglas contables, las validaciones y los asientos los aplica el código del sistema, que es verificable y está cubierto por pruebas.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────── 3 ───────────────────────────── -->
+<section>
+  <h2>3. Tecnologías (Tech Stack)</h2>
+  <table>
+    <tr><th style="width:24%">Tecnología</th><th style="width:40%">Para qué se usa</th><th>Por qué</th></tr>
+    <tr><td><b>Next.js 16</b> (App Router)</td><td>Aplicación web completa: pantallas, API interna, arranque del reloj automático</td><td>Un solo proyecto para frontend y backend; estándar de la industria</td></tr>
+    <tr><td><b>React 19</b> + <b>TypeScript</b></td><td>Interfaz y todo el código, con tipos estrictos</td><td>Los tipos evitan errores al manejar dinero y datos contables</td></tr>
+    <tr><td><b>Tailwind CSS 4</b></td><td>Diseño de las pantallas (claro y oscuro, celular)</td><td>Estilos consistentes sin hojas de estilo sueltas</td></tr>
+    <tr><td><b>Supabase · PostgreSQL</b></td><td>Base de datos: documentos, asientos, plan de cuentas (PUC), terceros, vistas de reportes</td><td>PostgreSQL gestionado en la nube, con respaldos y panel web</td></tr>
+    <tr><td><b>Supabase Auth + RLS</b></td><td>Inicio de sesión y permisos por rol (admin, editor, lector) aplicados fila por fila</td><td>La seguridad no depende de la pantalla: la base de datos la exige</td></tr>
+    <tr><td><b>Claude API</b> (Anthropic, Sonnet 5.5)</td><td>Leer PDF e imágenes y devolver los datos en un formato fijo</td><td>Lee documentos escaneados y fotos; respuesta estructurada y validable</td></tr>
+    <tr><td><b>Zod</b></td><td>Define y valida el formato exacto que debe devolver la IA</td><td>Una respuesta mal formada se rechaza antes de tocar la contabilidad</td></tr>
+    <tr><td><b>Google Drive API</b> + google-auth-library</td><td>Listar y descargar los soportes, solo lectura</td><td>Librería oficial de Google; permite trabajar sin llaves</td></tr>
+    <tr><td><b>Google Cloud IAM</b></td><td>Robot de solo lectura y permiso para suplantarlo</td><td>Cumple la política de la empresa que prohíbe llaves</td></tr>
+    <tr><td><b>datos.gov.co</b> (TRM)</td><td>Tasa de cambio oficial para documentos en dólares</td><td>Fuente oficial y gratuita; se guarda en caché</td></tr>
+    <tr><td><b>Vitest</b> + <b>PGlite</b></td><td>Pruebas automáticas de reglas contables y de las migraciones en un PostgreSQL en memoria</td><td>Se prueban sin tocar la base de datos real</td></tr>
+    <tr><td><b>Playwright</b> + Edge</td><td>Capturas del manual y generación de los PDF</td><td>Documentación reproducible con un comando</td></tr>
+    <tr><td><b>Supabase CLI</b></td><td>Aplicar migraciones y generar los tipos de la base de datos</td><td>Los cambios de la base de datos quedan versionados en el repositorio</td></tr>
+    <tr><td><b>Node.js 24</b>, tsx, ESLint</td><td>Entorno de ejecución, scripts de terminal y revisión de código</td><td>—</td></tr>
+  </table>
+</section>
+
+<!-- ───────────────────────────── 4 ───────────────────────────── -->
+<section class="sigue">
+  <h2>4. Cuentas y servicios externos vinculados</h2>
+  <table>
+    <tr><th style="width:17%">Servicio</th><th style="width:27%">Qué hace / qué guarda</th><th style="width:26%">Cuenta / recurso</th><th style="width:30%">Cómo se autentica el sistema</th></tr>
+    <tr><td><b>Supabase</b></td><td>Base de datos contable y usuarios del sistema</td><td>Organización «Paguro Corp», proyecto <code>grsuvasppmydwxdwreov</code> (São Paulo)</td><td>Clave pública + sesión del usuario (con RLS) en las pantallas; clave de servicio solo para los procesos automáticos</td></tr>
+    <tr><td><b>Google Drive</b></td><td>Los soportes contables</td><td>Carpeta <code>02_2026</code> en la unidad de joseph@pagurocorp.com</td><td>El robot <code>lector-facturas@…</code> tiene permiso de Lector sobre la carpeta</td></tr>
+    <tr><td><b>Google Cloud</b></td><td>El robot de lectura</td><td>Proyecto <code>paguro-contabilidad-03sb</code> (organización pagurocorp.com)</td><td>Sesión de una persona autorizada (gcloud) que suplanta al robot; rol Token Creator</td></tr>
+    <tr><td><b>Anthropic</b></td><td>La IA que lee los documentos; cobra por tokens</td><td>Organización en console.anthropic.com</td><td>Clave de API (<code>ANTHROPIC_API_KEY</code>)</td></tr>
+    <tr><td><b>datos.gov.co</b></td><td>TRM diaria</td><td>Público</td><td>Ninguna</td></tr>
+    <tr><td><b>GitHub</b></td><td>El código fuente y su historial</td><td>Repositorio privado (por crear)</td><td>No interviene en el funcionamiento</td></tr>
+  </table>
+  <div class="alerta"><b>Clave de Claude:</b> la actual es de desarrollo y se compartió durante el proyecto. Antes de entregar, se crea una nueva en la organización de la empresa y se elimina la anterior. El código no cambia: solo se reemplaza el valor de la variable.</div>
+</section>
+
+<!-- ───────────────────────────── 5 ───────────────────────────── -->
+<section>
+  <h2>5. Cómo se conectan los componentes</h2>
+  <div class="dos">
+    <div>
+      <h3>Navegador → Aplicación</h3>
+      <p>El usuario entra a <code>localhost:3000</code> con su correo y contraseña (Supabase Auth). En cada petición, un <i>proxy</i> renueva la sesión y redirige al login a quien no la tenga. Las consultas de las pantallas se hacen <b>con la sesión del usuario</b>, así que la base de datos solo le muestra y le permite lo que su rol autoriza.</p>
+      <h3>Aplicación → Supabase</h3>
+      <p>Dos formas de conexión:</p>
+      <ul>
+        <li><b>Clave pública + sesión</b> para todo lo que hace una persona. Se aplican los permisos por fila (RLS).</li>
+        <li><b>Clave de servicio</b> para los procesos automáticos (leer el Drive, registrar documentos). Solo existe en el servidor y nunca llega al navegador.</li>
+      </ul>
+      <p>Las operaciones críticas (aprobar con asiento, cambiar estado, tomar archivos de la cola) son <b>funciones dentro de la base de datos</b>, para que ocurran completas o no ocurran.</p>
+    </div>
+    <div>
+      <h3>Aplicación → Google Drive</h3>
+      <p>La organización prohíbe las llaves de cuentas de servicio. Por eso:</p>
+      <pre>Persona autorizada (gcloud)
+   │  rol "Service Account Token Creator"
+   ▼
+Robot lector-facturas  ── permiso Lector ──▶  Carpeta 02_2026
+   │  token temporal de 1 hora, solo lectura</pre>
+      <p>Ese inicio de sesión de la persona vence según la política de Google Workspace: es el único punto que requiere mantenimiento (sección 9).</p>
+      <h3>Aplicación → Claude</h3>
+      <p>Envía el archivo (PDF o imagen) junto con instrucciones fijas, y recibe un JSON con un formato exacto. Las instrucciones se guardan en caché del lado de Anthropic para abaratar las lecturas.</p>
+      <h3>Aplicación → datos.gov.co</h3>
+      <p>Para documentos en dólares, consulta la TRM del día del documento y la guarda en la tabla <code>tasas_cambio</code> para no repetir la consulta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────── 6 ───────────────────────────── -->
+<section class="sigue">
+  <h2>6. Automatizaciones</h2>
+  <table>
+    <tr><th style="width:30%">Automatización</th><th>Cómo funciona</th></tr>
+    <tr><td><b>Sincronización con el Drive</b></td><td>Al encender la aplicación y cada 15 minutos (configurable). Nunca corren dos a la vez. Lee hasta 20 documentos por vuelta. Revisar el Drive no usa IA ni cuesta nada; la IA solo se usa con archivos nuevos o modificados.</td></tr>
+    <tr><td><b>Cola de archivos</b></td><td>Cada archivo del Drive queda registrado con su estado (pendiente, procesado, error, ignorado). Un archivo modificado vuelve a la cola; uno ya leído nunca se vuelve a leer.</td></tr>
+    <tr><td><b>Reintentos</b></td><td>Los errores temporales (sin créditos, límite de uso, servicio saturado) se reintentan solos hasta 5 veces, con espera. Si se acaban los créditos, la vuelta se pausa para no gastar intentos.</td></tr>
+    <tr><td><b>Detección de duplicados</b></td><td>Por contenido idéntico del archivo, por proveedor + número de factura, y por referencia + valor en los pagos.</td></tr>
+    <tr><td><b>Aprobación automática</b></td><td>Si un documento pasa todas las validaciones y la confianza de la lectura es de 85 % o más, se aprueba y se contabiliza solo.</td></tr>
+    <tr><td><b>Asientos contables</b></td><td>Se generan solos al aprobar, con débitos = créditos verificados. Si se corrige un documento aprobado, su asiento se elimina y vuelve a revisión.</td></tr>
+    <tr><td><b>Tasa de cambio</b></td><td>TRM oficial automática para documentos en USD.</td></tr>
+    <tr><td><b>Socios</b></td><td>La IA reconoce las transferencias del socio a la empresa (aportes) y de la empresa al socio (nómina).</td></tr>
+  </table>
+</section>
+
+<!-- ───────────────────────────── 7 ───────────────────────────── -->
+<section>
+  <h2>7. Cómo trabaja la inteligencia artificial, paso a paso</h2>
+  <div class="tubo">
+    <div class="etapa"><b>1. Inventario</b>El reloj recorre la carpeta del Drive y registra cada archivo nuevo o modificado. Ignora lo que no es PDF o imagen y las carpetas excluidas. Sin IA.</div>
+    <div class="etapa"><b>2. Cola y descarga</b>Toma hasta 20 pendientes. Si el archivo es idéntico a otro ya leído, lo omite sin gastar IA. Si no, lo descarga del Drive.</div>
+    <div class="etapa ia"><b>3. Lectura (Claude)</b>Envía el archivo con instrucciones fijas: datos de la empresa, socios, categorías y cuentas válidas, y reglas de lectura (formatos colombianos, «mejor vacío que inventado»).</div>
+    <div class="etapa ia"><b>4. Extracción</b>Claude devuelve un JSON con un formato exacto: clase de documento, emisor y receptor con NIT, fechas, montos e impuestos, ítems, desglose del pago, categoría sugerida, confianza por campo y sus dudas.</div>
+    <div class="etapa"><b>5. Clasificación</b>El código decide si es compra, venta o gasto comparando los NIT con el de Paguro; identifica al tercero, asigna la categoría y la cuenta del PUC, y convierte a pesos con la TRM.</div>
+    <div class="etapa"><b>6. Validación</b>El código revisa: que el total cuadre con subtotal e impuestos (antes o después de retenciones, con tolerancia de redondeo), NIT válidos, fechas posibles y del mes de la carpeta, cuenta asignada, duplicados y confianza ≥ 85 %.</div>
+    <div class="etapa"><b>7. Decisión</b>Sin errores → <b>aprobado</b>. Con errores o dudas de la IA → <b>por revisar</b>. Si no es un movimiento de dinero → <b>informativo</b>.</div>
+    <div class="etapa"><b>8. Contabilización</b>Genera el asiento (débitos = créditos). La base de datos guarda el asiento y marca el documento como aprobado en una sola operación: o pasan las dos cosas, o ninguna.</div>
+    <div class="etapa humano"><b>9. Revisión humana</b>Lo dudoso aparece en <i>Por revisar</i> con el original al lado y la explicación. La persona corrige, aprueba o rechaza, y cada cambio queda en el historial.</div>
+  </div>
+
+  <h3>Qué reconoce</h3>
+  <p>Facturas de compra, gasto y venta (nacionales y del exterior) · pagos de impuestos a la DIAN · planillas PILA, con desglose por subsistema · nómina · transferencias a proveedores (también SWIFT) · declaraciones de importación (arancel e IVA) · aportes de socio · documentos informativos, que no se contabilizan.</p>
+
+  <h3>Garantías de diseño</h3>
+  <ul>
+    <li><b>La IA no decide sola lo contable.</b> Extrae y sugiere; las reglas (tipo, cuenta, cuadre, asiento) las aplica código determinista con 120 pruebas automáticas.</li>
+    <li><b>Preferir vacío a inventado:</b> si un dato no está en el documento, la IA lo deja vacío y el documento va a revisión.</li>
+    <li><b>Trazabilidad:</b> se guarda la respuesta original de la IA, la confianza por campo, los hallazgos y cada corrección humana con su autor.</li>
+    <li><b>Costo controlado:</b> unos 9.600 tokens por documento en promedio; los archivos ya leídos o duplicados no se vuelven a enviar; el consumo se registra por mes. El modelo se puede cambiar por uno más barato con una variable.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────── 8 ───────────────────────────── -->
+<section class="sigue">
+  <h2>8. Seguridad y datos</h2>
+  <ul>
+    <li><b>Roles:</b> administrador (todo, incluidos los saldos iniciales), editor (revisar, corregir y aprobar) y lector (consultar). Se exigen en la base de datos (RLS) y se comprueban en cada prueba de punta a punta.</li>
+    <li><b>Claves:</b> solo en <code>.env.local</code>, que está excluido del repositorio. Se verificó que ninguno de los archivos que se suben contiene claves.</li>
+    <li><b>Drive:</b> acceso de solo lectura, con un token temporal de una hora y sin llaves permanentes.</li>
+    <li><b>Respaldos:</b> <code>npm run respaldo</code> exporta todas las tablas contables (sin Docker); Supabase tiene además copias automáticas según el plan.</li>
+    <li><b>Repositorio privado:</b> contiene datos reales del negocio (datos del socio en una migración y capturas del manual).</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────── 9 ───────────────────────────── -->
+<section>
+  <h2>9. Entrega por GitHub: qué recibe y qué necesita</h2>
+  <p><b>Verificado:</b> el repositorio se clonó en una carpeta nueva y, solo con <code>.env.local</code>, pasó la instalación (<code>npm ci</code>, 0 vulnerabilidades), las 120 pruebas, la revisión de tipos y estilo, la compilación de producción y las pruebas de pantallas y de flujo completo. La base de datos en la nube tiene aplicadas las mismas 11 migraciones del código.</p>
+  <table>
+    <tr><th style="width:36%">Componente</th><th style="width:16%">¿Viaja con GitHub?</th><th>Cómo se obtiene</th></tr>
+    <tr><td>Código, migraciones, pruebas, documentación</td><td class="ok">Sí</td><td><code>git clone</code></td></tr>
+    <tr><td>Datos contables y usuarios del sistema</td><td>No hace falta</td><td>Están en Supabase: se ven al conectar con las mismas claves</td></tr>
+    <tr><td>Claves (<code>.env.local</code>)</td><td class="no">No</td><td>Gestor de contraseñas o en persona; nunca por chat ni correo</td></tr>
+    <tr><td>Sesión de Google para leer el Drive</td><td class="no">No</td><td><code>gcloud auth application-default login</code> en cada PC</td></tr>
+    <tr><td>Vínculo de la CLI de Supabase</td><td class="no">No</td><td><code>npx supabase link</code> (solo para migraciones)</td></tr>
+    <tr><td>Dependencias y compilación</td><td class="no">No</td><td><code>npm ci</code> y <code>npm run build</code></td></tr>
+    <tr><td>Cuentas (Supabase, Google Cloud, Anthropic, GitHub)</td><td class="no">No</td><td>Invitaciones con el rol adecuado (abajo)</td></tr>
+  </table>
+
+  <h3>Quién debe tener acceso a qué</h3>
+  <table>
+    <tr><th style="width:24%">Servicio</th><th style="width:38%">Dueño (Joseph)</th><th>Quien desarrolla o instala</th></tr>
+    <tr><td>GitHub</td><td>Administrador del repositorio</td><td>Colaborador con escritura</td></tr>
+    <tr><td>Supabase</td><td>Owner de la organización</td><td>Developer</td></tr>
+    <tr><td>Google Cloud</td><td>Owner del proyecto; Token Creator sobre el robot</td><td>Token Creator, si va a encender el sistema</td></tr>
+    <tr><td>Google Workspace</td><td>Administrador (control de sesión)</td><td>—</td></tr>
+    <tr><td>Anthropic</td><td>Owner de la organización y la facturación</td><td>Una clave propia, si desarrolla</td></tr>
+  </table>
+
+  <h3>El vencimiento de la autenticación de Google</h3>
+  <p>La política de seguridad de Google Workspace obliga a reautenticarse periódicamente, y cuando vence se detiene la lectura de documentos nuevos (el sistema lo avisa en pantalla). Hay tres soluciones: (1) volver a iniciar sesión, un minuto; (2) <b>recomendado</b>: ajustar en la consola de administración el <i>control de sesión de Google Cloud</i> para esa cuenta; (3) autorizar, solo para este proyecto, una llave del robot, que no vence pero debe custodiarse. El detalle está en <code>docs/INSTALACION.md §7</code>.</p>
+
+  <h3>Pasos del traspaso</h3>
+  <ol>
+    <li>Crear el repositorio privado y subir el código (<code>INSTALACION.md §13</code>); dar acceso de administrador a Joseph.</li>
+    <li>Entregar <code>.env.local</code> por un canal seguro, con la clave nueva de Claude de la empresa.</li>
+    <li>En el PC de destino: instalar Node 24, Git y Google Cloud CLI; clonar; <code>npm ci</code>; copiar <code>.env.local</code>; <code>npm run build</code>.</li>
+    <li>Iniciar sesión de Google y comprobar las tres conexiones: <code>npm run verificar</code>, <code>probar-drive</code> y <code>probar-ia</code>.</li>
+    <li>Crear el usuario administrador, encender con <code>iniciar-paguro.bat</code> y correr <code>prueba:interfaz</code> y <code>prueba:flujo</code>.</li>
+    <li>Ajustar el control de sesión de Google y confirmar la titularidad de las cuentas.</li>
+  </ol>
+</section>
+
+<!-- ───────────────────────────── 10 ───────────────────────────── -->
+<section>
+  <h2>10. Cómo continuar el desarrollo</h2>
+  <h3>Organización del código</h3>
+  <pre>src/app/              Rutas (delgadas): páginas en (erp)/… y endpoints en api/…
+src/erp/              Armazón del ERP: registro de módulos, menú, sesión, login
+src/modules/contabilidad/
+  core/       Reglas contables puras (sin red ni base de datos) → la parte más probada
+  ai/         Prompt, formato de respuesta y conexión con Claude
+  drive/ trm/ Clientes de Google Drive y de la TRM
+  services/   Procesos: sincronizar, procesar, revisar, reloj automático
+  repo/       Conexión a Supabase y tipos generados de la base de datos
+  api/ ui/    Lógica de endpoints y consultas · componentes de pantalla
+  modulo.ts   Manifiesto: lo que el ERP muestra en el menú
+supabase/migrations/  Toda la base de datos, versionada (tablas, vistas, RLS, datos iniciales)
+scripts/ tests/       Herramientas de terminal · pruebas automáticas</pre>
+  <p>Regla de la arquitectura: <b>las reglas de negocio van en <code>core/</code></b> (fáciles de probar y de llevar a otro sistema); las rutas solo conectan pantallas con servicios.</p>
+
+  <h3>Agregar un módulo (por ejemplo, Inventario)</h3>
+  <ol>
+    <li>Crear <code>src/modules/inventario/</code> con su <code>modulo.ts</code> y <code>rutas.ts</code>, tomando Contabilidad como modelo, y registrarlo en <code>src/erp/modulos.ts</code>. Aparece solo en el menú.</li>
+    <li>Páginas en <code>src/app/(erp)/inventario/</code> y endpoints en <code>src/app/api/inventario/</code>.</li>
+    <li>Datos: una migración nueva con su propio schema (<code>inventario</code>), RLS y permisos por rol; exponer el schema en la configuración de Supabase.</li>
+    <li>Pruebas en <code>tests/</code> y, si tiene ajustes, una sección en <i>Configuración</i>.</li>
+  </ol>
+
+  <h3>Desarrollar sin afectar la contabilidad real</h3>
+  <ul>
+    <li><b>Proyecto de Supabase de desarrollo</b> (gratuito) creado con las migraciones del repositorio, y una <b>carpeta de prueba</b> del Drive. Así se trabaja con la misma estructura y sin datos reales.</li>
+    <li>Si hay que conectarse a producción: apagar la sincronización (<code>SYNC_AUTOMATICA=off</code>) y no reprocesar documentos sin intención.</li>
+    <li>Cambios a la base de datos: siempre como migración nueva. Primero en desarrollo; luego respaldo, vista previa (<code>--dry-run</code>) y aplicación en producción.</li>
+  </ul>
+
+  <h3>Publicar cambios</h3>
+  <pre>Desarrollo:  rama → cambios → npm test, typecheck, lint → Pull Request → main
+Producción:  git pull → npm ci → (migraciones: respaldo → dry-run → push) → npm run build
+             → reiniciar iniciar-paguro.bat → prueba:interfaz y prueba:flujo</pre>
+</section>
+
+<section class="sigue">
+  <h2>11. Estado y siguientes pasos</h2>
+  <p><b>Pendientes de datos</b>, que gestiona el gerente: comprobantes de aportes y cobros de ventas (hoy el banco aparece negativo porque faltan esas entradas), claves de 4 PDF protegidos y 3 documentos por revisar. <b>Para el contador:</b> confirmar la cuenta de aportes, la prima de junio, el tratamiento de fletes y aduanas, y cargar los saldos iniciales.</p>
+  <p><b>Siguientes funciones propuestas:</b> leer los extractos bancarios para registrar cobros y conciliar el banco; reglas aprendidas de las correcciones; vista para celular; publicación en la nube para acceder desde cualquier lugar.</p>
+  <p>El detalle actualizado está en <code>docs/ESTADO.md</code>.</p>
+</section>
+
+</body>
+</html>

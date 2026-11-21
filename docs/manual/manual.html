@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual de uso · Paguro ERP · Contabilidad</title>
+<style>
+  @page { size: Letter; margin: 18mm 16mm 20mm; }
+  * { box-sizing: border-box; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; color: #1f2328; font-size: 10.5pt; line-height: 1.5; margin: 0; }
+  h1 { font-size: 22pt; margin: 0 0 6pt; letter-spacing: -0.3pt; }
+  h2 { font-size: 15pt; margin: 0 0 8pt; padding-bottom: 4pt; border-bottom: 2px solid #2b79d8; break-after: avoid; }
+  h3 { font-size: 11.5pt; margin: 14pt 0 4pt; break-after: avoid; }
+  p { margin: 0 0 7pt; }
+  ul, ol { margin: 0 0 8pt; padding-left: 18pt; }
+  li { margin-bottom: 3pt; }
+  section { break-before: page; }
+  figure { margin: 8pt 0 12pt; break-inside: avoid; }
+  figure img { width: 100%; border: 1px solid #d0d7de; border-radius: 6px; display: block; }
+  figure.media img { width: 55%; margin: 0 auto; }
+  figcaption { font-size: 8.5pt; color: #59636e; margin-top: 4pt; text-align: center; }
+  table { width: 100%; border-collapse: collapse; margin: 4pt 0 10pt; font-size: 9.5pt; break-inside: avoid; }
+  th, td { text-align: left; vertical-align: top; padding: 5pt 7pt; border-bottom: 1px solid #d8dee4; }
+  th { background: #f3f5f7; font-weight: 600; }
+  .nota { background: #eef5fd; border-left: 4px solid #2b79d8; padding: 7pt 10pt; margin: 8pt 0 10pt; border-radius: 0 6px 6px 0; break-inside: avoid; }
+  .alerta { background: #fdf4e3; border-left: 4px solid #c7821e; padding: 7pt 10pt; margin: 8pt 0 10pt; border-radius: 0 6px 6px 0; break-inside: avoid; }
+  .chip { display: inline-block; font-size: 8.5pt; font-weight: 600; padding: 0 6pt; border-radius: 10pt; white-space: nowrap; }
+  .ok { background: #e3f4e8; color: #1d7a3a; } .rev { background: #fdf0d8; color: #8a5a00; }
+  .mal { background: #fbe4e4; color: #b42318; } .neutro { background: #eef0f2; color: #59636e; }
+  code { font-family: Consolas, monospace; font-size: 9pt; background: #f3f5f7; padding: 0 3pt; border-radius: 3px; }
+  .flujo { display: flex; gap: 6pt; align-items: stretch; margin: 10pt 0 14pt; }
+  .paso { flex: 1; border: 1px solid #d0d7de; border-radius: 8px; padding: 8pt; font-size: 9pt; background: #fafbfc; }
+  .paso b { display: block; font-size: 9.5pt; margin-bottom: 2pt; color: #2b79d8; }
+  .flecha { align-self: center; color: #8c959f; font-size: 14pt; }
+  .portada { height: 230mm; display: flex; flex-direction: column; justify-content: center; }
+  .portada .marca { font-size: 12pt; color: #2b79d8; font-weight: 600; letter-spacing: 1pt; text-transform: uppercase; margin-bottom: 10pt; }
+  .portada h1 { font-size: 34pt; }
+  .portada .sub { font-size: 14pt; color: #59636e; margin-bottom: 30pt; }
+  .portada .datos { font-size: 10pt; color: #59636e; border-top: 1px solid #d0d7de; padding-top: 10pt; }
+  .indice li { margin-bottom: 5pt; }
+</style>
+</head>
+<body>
+
+<div class="portada">
+  <div class="marca">Paguro Corp</div>
+  <h1>Manual de uso</h1>
+  <div class="sub">Paguro ERP · Módulo de Contabilidad</div>
+  <div class="datos">
+    Versión 1.0 · noviembre de 2026<br>
+    Para: quien usa el sistema día a día (administrador y editores)
+  </div>
+</div>
+
+<section>
+  <h2>Contenido</h2>
+  <ol class="indice">
+    <li>Qué hace el sistema</li>
+    <li>Entrar al sistema</li>
+    <li>Subir documentos al Drive</li>
+    <li>El Resumen</li>
+    <li>Documentos: el estado del Drive</li>
+    <li>Revisar un documento</li>
+    <li>Documentos aprobados y su asiento</li>
+    <li>Reportes</li>
+    <li>Configuración: saldos iniciales</li>
+    <li>Preguntas frecuentes</li>
+    <li>Pendientes para el contador</li>
+  </ol>
+
+  <h2 style="margin-top:22pt">1. Qué hace el sistema</h2>
+  <p>El sistema reúne la contabilidad de Paguro Corp en un solo lugar. Usted sigue haciendo lo mismo de siempre, que es <b>guardar los soportes en Google Drive</b>, y el sistema se encarga del resto:</p>
+  <div class="flujo">
+    <div class="paso"><b>1. Usted sube</b>Facturas, comprobantes de pago, planillas PILA, pagos a la DIAN, nómina y aportes, en la carpeta del mes en el Drive.</div>
+    <div class="flecha">→</div>
+    <div class="paso"><b>2. El sistema lee</b>Cada 15 minutos revisa el Drive. La inteligencia artificial lee cada archivo nuevo: quién, cuánto, cuándo y de qué se trata.</div>
+    <div class="flecha">→</div>
+    <div class="paso"><b>3. Clasifica y registra</b>Asigna la categoría y la cuenta contable. Si todo está claro, lo aprueba y hace el asiento solo.</div>
+    <div class="flecha">→</div>
+    <div class="paso"><b>4. Usted revisa</b>Lo que tiene dudas queda en <b>Por revisar</b> para que usted lo corrija y lo apruebe.</div>
+  </div>
+  <p>Con los documentos aprobados, el sistema arma los <b>reportes contables</b>: estado de resultados, balance, IVA y retenciones, cuentas por pagar y más. <b>Cada cifra tiene un enlace a su soporte en el Drive</b>, así que nunca hay que buscar a mano de dónde salió un valor.</p>
+  <div class="nota"><b>Importante:</b> el sistema no borra ni modifica nada en el Drive. Solo lee los archivos.</div>
+</section>
+
+<section>
+  <h2>2. Entrar al sistema</h2>
+  <p>Con el sistema encendido en el computador, abra el navegador (Chrome o Edge) y entre a <code>http://localhost:3000</code>. Escriba su correo de la empresa y su contraseña.</p>
+  <figure class="media"><img src="capturas/01-login.png" alt=""><figcaption>Pantalla de entrada.</figcaption></figure>
+  <div class="nota">Si no tiene usuario o olvidó la contraseña, pídale a quien instaló el sistema que se la cree de nuevo. Los usuarios tienen uno de tres permisos: <b>administrador</b> (todo), <b>editor</b> (revisar y aprobar documentos) o <b>lector</b> (solo consultar).</div>
+
+  <h3>El menú</h3>
+  <p>A la izquierda está el menú. El número al lado de <b>Documentos</b> indica cuántos documentos esperan su revisión.</p>
+  <figure><img src="capturas/02-inicio.png" alt=""><figcaption>Inicio del sistema y menú.</figcaption></figure>
+  <table>
+    <tr><th style="width:26%">Opción</th><th>Para qué sirve</th></tr>
+    <tr><td><b>Resumen</b></td><td>Cómo va el mes: ingresos, gastos, utilidad y pendientes.</td></tr>
+    <tr><td><b>Documentos</b></td><td>Todo lo que se leyó del Drive. Aquí se revisa y se aprueba.</td></tr>
+    <tr><td><b>Reportes</b></td><td>Los reportes contables, con enlaces a cada soporte.</td></tr>
+    <tr><td><b>⚙ Configuración</b></td><td>Saldos iniciales de la contabilidad.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>3. Subir documentos al Drive</h2>
+  <p>Guarde cada soporte en Google Drive, dentro de la carpeta <b>02_2026</b>, en la carpeta del mes que corresponde (<b>enero</b>, <b>febrero</b>, …). El nombre del archivo no importa.</p>
+  <table>
+    <tr><th style="width:38%">Qué subir</th><th>Ejemplos</th></tr>
+    <tr><td>Facturas de compra y de gasto</td><td>Proveedores, agencias de aduanas, fletes, servicios.</td></tr>
+    <tr><td>Facturas de venta</td><td>Las que Paguro le emite a sus clientes.</td></tr>
+    <tr><td>Pagos de impuestos</td><td>Recibos 490 de la DIAN, comprobantes PSE.</td></tr>
+    <tr><td>Planillas de seguridad social</td><td>PILA pagada.</td></tr>
+    <tr><td>Nómina</td><td>Comprobante de la transferencia de la empresa al empleado.</td></tr>
+    <tr><td>Aportes del socio</td><td>Comprobante de la transferencia de su cuenta personal a la cuenta de Paguro.</td></tr>
+    <tr><td>Transferencias a proveedores</td><td>Pagos nacionales o al exterior (SWIFT).</td></tr>
+  </table>
+  <div class="alerta">
+    <b>Para que el sistema pueda leerlos:</b>
+    <ul style="margin:4pt 0 0">
+      <li>Solo <b>PDF o imágenes</b> (JPG, PNG). Los Excel, Word o documentos de Google no se leen.</li>
+      <li><b>Sin contraseña.</b> Un PDF protegido no se puede abrir; suba una versión sin clave.</li>
+      <li>Que se vea completo y legible. Una foto borrosa o cortada va a quedar en revisión.</li>
+    </ul>
+  </div>
+  <div class="nota"><b>Aportes de socio:</b> cada vez que transfiera dinero de su cuenta personal a la empresa, suba el comprobante. Así el saldo del banco en los reportes refleja ese dinero. Si no se suben, el banco aparece con un saldo menor al real (incluso negativo).</div>
+  <p>No hay que hacer nada más. El sistema revisa el Drive cada 15 minutos mientras está encendido, y una vez al encenderlo.</p>
+</section>
+
+<section>
+  <h2>4. El Resumen</h2>
+  <p>Muestra cómo va el mes con los documentos aprobados. Cambie el mes con el selector de arriba a la derecha.</p>
+  <figure><img src="capturas/03-resumen.png" alt=""><figcaption>Resumen del mes.</figcaption></figure>
+  <ul>
+    <li><b>Ingresos, gastos y utilidad del mes.</b></li>
+    <li><b>Pendientes de revisión:</b> haga clic para ir a revisarlos.</li>
+    <li><b>Avisos</b> en amarillo o rojo: algo que requiere su atención, por ejemplo archivos que no se pudieron leer.</li>
+    <li>La gráfica de los últimos 12 meses y los gastos del mes por cuenta.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>5. Documentos: el estado del Drive</h2>
+  <p>Arriba de la lista está la franja de <b>Google Drive</b>. Indica cuándo fue la última revisión y si llegaron documentos nuevos. Si no quiere esperar los 15 minutos después de subir algo, haga clic en <b>Sincronizar ahora</b>.</p>
+  <figure><img src="capturas/04-por-revisar.png" alt=""><figcaption>Documentos, pestaña «Por revisar».</figcaption></figure>
+  <h3>Archivos que no se leyeron</h3>
+  <p>Si hay archivos con problemas, aparece un aviso en rojo. Haga clic en <b>ver cuáles</b>: cada archivo dice por qué no se leyó, qué hacer y tiene su enlace <b>Ver en Drive</b>.</p>
+  <figure><img src="capturas/05-drive-problemas.png" alt=""><figcaption>Archivos que no se pudieron leer y archivos que no se leen por su formato.</figcaption></figure>
+
+  <h3>Las dos pestañas</h3>
+  <table>
+    <tr><th style="width:22%">Pestaña</th><th>Qué muestra</th></tr>
+    <tr><td><b>Por revisar</b></td><td>Lo que la inteligencia artificial no pudo aprobar sola. Es su lista de tareas.</td></tr>
+    <tr><td><b>Todos</b></td><td>Todos los documentos, con búsqueda (por proveedor, NIT o número) y filtros por mes, tipo, estado y categoría.</td></tr>
+  </table>
+  <figure><img src="capturas/06-todos.png" alt=""><figcaption>Pestaña «Todos» con búsqueda y filtros.</figcaption></figure>
+  <h3>Estados de un documento</h3>
+  <table>
+    <tr><th style="width:22%">Estado</th><th>Qué significa</th></tr>
+    <tr><td><span class="chip ok">✓ Aprobada</span></td><td>Está en la contabilidad y tiene su asiento.</td></tr>
+    <tr><td><span class="chip rev">! En revisión</span></td><td>Espera que usted lo revise. Todavía no cuenta en los reportes.</td></tr>
+    <tr><td><span class="chip mal">✕ Rechazada</span></td><td>Usted la rechazó. No cuenta en los reportes.</td></tr>
+    <tr><td><span class="chip neutro">· Informativo</span></td><td>No es un movimiento de dinero (por ejemplo, una declaración sin pago o un desprendible), o es un duplicado de otro documento. No cuenta.</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>6. Revisar un documento</h2>
+  <p>En <b>Por revisar</b>, haga clic en el nombre del proveedor para abrir el documento. A la izquierda está el <b>archivo original</b> y a la derecha lo que leyó el sistema.</p>
+  <figure><img src="capturas/07-detalle-revision.png" alt=""><figcaption>Un documento en revisión.</figcaption></figure>
+  <h3>Pasos</h3>
+  <ol>
+    <li>Lea <b>Lo que encontró la revisión automática</b>: en rojo, lo que impide aprobarlo; en amarillo, advertencias. La <b>nota de la IA</b> explica su duda.</li>
+    <li>Compare los datos con el documento original. Los campos marcados <span class="chip rev">! Lectura dudosa</span> son los que más conviene revisar.</li>
+    <li>Corrija lo que haga falta: fecha, valores, proveedor, categoría o cuenta contable. Al elegir una categoría, la cuenta contable se asigna sola.</li>
+    <li>Elija una acción:</li>
+  </ol>
+  <table>
+    <tr><th style="width:24%">Botón</th><th>Qué hace</th></tr>
+    <tr><td><b>Aprobar</b> (o <b>Guardar y aprobar</b>)</td><td>Guarda los cambios, genera el asiento contable y el documento pasa a la contabilidad. Si faltan datos, el sistema dice cuáles.</td></tr>
+    <tr><td><b>Guardar cambios</b></td><td>Guarda las correcciones sin aprobar, para terminar después.</td></tr>
+    <tr><td><b>Rechazar</b></td><td>El documento no se registra, por ejemplo si no es de la empresa. Puede escribir el motivo.</td></tr>
+  </table>
+  <div class="nota">Todas las correcciones quedan en el <b>historial</b> del documento: qué se cambió, el valor anterior y quién lo hizo.</div>
+</section>
+
+<section>
+  <h2>7. Documentos aprobados y su asiento</h2>
+  <p>Un documento aprobado muestra su <b>asiento contable</b> (débitos y créditos por cuenta) y, en las facturas, el detalle de ítems.</p>
+  <figure><img src="capturas/08-detalle-aprobado.png" alt=""><figcaption>Una factura aprobada con su asiento contable.</figcaption></figure>
+  <div class="alerta"><b>Si corrige un documento ya aprobado,</b> se borra su asiento y vuelve a <b>Por revisar</b>, para que nunca queden cifras viejas en los reportes. Revíselo y apruébelo de nuevo.</div>
+</section>
+
+<section>
+  <h2>8. Reportes</h2>
+  <p>Elija el reporte y las fechas: se actualiza solo. Con <b>Exportar CSV</b> lo descarga para abrirlo en Excel.</p>
+  <figure><img src="capturas/09-reporte-resultados.png" alt=""><figcaption>Estado de resultados. Cada fila lleva a sus movimientos.</figcaption></figure>
+  <table>
+    <tr><th style="width:28%">Reporte</th><th>Qué muestra</th><th style="width:28%">Al hacer clic en una fila</th></tr>
+    <tr><td>Estado de resultados</td><td>Ingresos, costos, gastos y utilidad del periodo.</td><td>Movimientos de esa cuenta</td></tr>
+    <tr><td>Balance general</td><td>Activos, pasivos y patrimonio a una fecha.</td><td>Movimientos de esa cuenta</td></tr>
+    <tr><td>Balance de comprobación</td><td>Saldo anterior, movimientos y saldo final por cuenta.</td><td>Movimientos de esa cuenta</td></tr>
+    <tr><td>Gastos por categoría</td><td>Cuánto se gastó en cada tipo de gasto.</td><td>Las facturas de esa categoría</td></tr>
+    <tr><td>Gastos por proveedor</td><td>Cuánto se le compró a cada proveedor.</td><td>Las facturas de ese proveedor</td></tr>
+    <tr><td>IVA y retenciones</td><td>IVA generado, descontable y retenciones por mes.</td><td>Los documentos de ese mes</td></tr>
+    <tr><td>Cuentas por pagar</td><td>Lo que se le debe a cada proveedor.</td><td>Los documentos de ese proveedor</td></tr>
+    <tr><td>Cuentas por cobrar</td><td>Lo que le deben los clientes.</td><td>Los documentos de ese cliente</td></tr>
+    <tr><td>Libro mayor</td><td>Cada movimiento por cuenta con su saldo.</td><td>El documento y su archivo en el Drive</td></tr>
+  </table>
+  <figure><img src="capturas/10-reporte-libro-mayor.png" alt=""><figcaption>Libro mayor: cada movimiento con «Ver documento» y «Ver en Drive».</figcaption></figure>
+  <div class="nota">Los reportes solo incluyen documentos <b>aprobados</b>. Si una cifra no cuadra con lo que espera, revise la pestaña <b>Por revisar</b>: puede haber documentos pendientes.</div>
+</section>
+
+<section>
+  <h2>9. Configuración: saldos iniciales</h2>
+  <p>Los <b>saldos iniciales</b> son lo que la empresa tenía en cada cuenta antes de empezar a usar el sistema, por ejemplo el saldo del banco al 1 de enero de 2026. Los entrega el contador. Sin ellos, el balance general solo muestra los movimientos registrados en el sistema.</p>
+  <figure><img src="capturas/11-configuracion.png" alt=""><figcaption>Configuración → Saldos iniciales.</figcaption></figure>
+  <p>Para cargar un saldo: escriba el código de la cuenta (de 6 dígitos, por ejemplo <code>112005</code> para la cuenta de ahorros de Bancolombia), la fecha de corte y el valor en <b>Débito</b> o en <b>Crédito</b>, y haga clic en <b>Agregar</b>. Solo un administrador puede cargar o borrar saldos. Al final, el total de débitos debe ser igual al de créditos; si no, el sistema lo avisa.</p>
+</section>
+
+<section>
+  <h2>10. Preguntas frecuentes</h2>
+  <h3>Subí un documento y no aparece.</h3>
+  <p>El sistema revisa el Drive cada 15 minutos. Para no esperar, en <b>Documentos</b> haga clic en <b>Sincronizar ahora</b>. Si aun así no aparece, abra el aviso de archivos con problemas: puede que no sea PDF ni imagen, que tenga contraseña o que esté fuera de la carpeta del año.</p>
+  <h3>Aparece un aviso rojo: «No se pudo revisar el Drive».</h3>
+  <p>El aviso explica qué hacer. El caso más común es que Google pida volver a iniciar sesión por seguridad: avísele a quien instaló el sistema. Mientras tanto, lo que ya está registrado sigue disponible.</p>
+  <h3>El banco aparece con saldo negativo.</h3>
+  <p>Faltan entradas de dinero: los aportes del socio y los cobros de las ventas. Suba al Drive los comprobantes de los aportes (ver sección 3) y cargue el saldo inicial del banco (sección 9).</p>
+  <h3>La IA se equivocó en un documento ya aprobado.</h3>
+  <p>Ábralo, corrija el dato y apruébelo de nuevo. El asiento se rehace con los datos corregidos y el cambio queda en el historial.</p>
+  <h3>Un documento está repetido.</h3>
+  <p>El sistema detecta los duplicados y los marca como <span class="chip neutro">· Informativo</span>. Si se le escapa uno, ábralo y <b>Rechácelo</b>.</p>
+  <h3>¿Cómo borro un documento?</h3>
+  <p>Los documentos no se borran: se <b>rechazan</b>, para que quede el registro de por qué no se contabilizó. Ojo: borrar el archivo del Drive <b>no</b> lo quita de la contabilidad; lo ya registrado se conserva. Para sacarlo de los reportes, rechácelo en el sistema.</p>
+  <h3>¿El sistema funciona con el computador apagado?</h3>
+  <p>No. El sistema corre en este computador: con el computador apagado no se revisa el Drive. Al encenderlo de nuevo, se pone al día solo con lo que se haya subido.</p>
+</section>
+
+<section>
+  <h2>11. Pendientes para el contador</h2>
+  <p>Estos puntos se registraron con un criterio razonable, pero conviene que el contador los confirme:</p>
+  <table>
+    <tr><th style="width:32%">Tema</th><th>Cómo está hoy</th></tr>
+    <tr><td>Aportes del socio</td><td>Se registran en el patrimonio, cuenta <b>310520</b> «Aportes de socios por capitalizar». Si el contador prefiere otra cuenta (por ejemplo, una deuda con el socio), se cambia en la configuración sin perder nada.</td></tr>
+    <tr><td>Prima de junio</td><td>El pago «nómina Joseph Prima» (2.584.238) está completo en <b>Sueldos</b>. Si se quiere, se separa la prima en la cuenta <b>510536</b>.</td></tr>
+    <tr><td>Fletes y agencia de aduanas</td><td>Se registran como gasto. Pueden ir como parte del costo de la mercancía importada.</td></tr>
+    <tr><td>Saldos iniciales</td><td>Aún no se han cargado (sección 9).</td></tr>
+    <tr><td>Plan de cuentas</td><td>Basado en el PUC colombiano, pendiente de validación general.</td></tr>
+  </table>
+</section>
+
+</body>
+</html>

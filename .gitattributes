@@ -1,0 +1,9 @@
+# Saltos de línea iguales en cualquier computador (Windows, Mac, Linux).
+* text=auto eol=lf
+# Los .bat de Windows necesitan CRLF para funcionar bien.
+*.bat text eol=crlf
+# Binarios: nunca convertir.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.ico binary
