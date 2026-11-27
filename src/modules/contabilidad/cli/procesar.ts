@@ -1,6 +1,6 @@
 // Procesa con IA archivos pendientes del inventario.
 // Uso: npm run procesar -- [cantidad=5] [concurrencia=3]
-import { procesarPendientes } from "../src/modules/contabilidad/services/lote";
+import { procesarPendientes } from "../services/lote";
 
 const ETIQUETAS: Record<string, string> = {
   aprobada: "✔ aprobada",

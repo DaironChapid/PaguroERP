@@ -1,6 +1,6 @@
 // Resumen contable rápido desde las vistas de reportes.
 // Uso: npm run resumen
-import { crearClienteServicio } from "../src/modules/contabilidad/repo/supabase";
+import { crearClienteServicio } from "../repo/supabase";
 
 const cop = (n: number | null) => `$${Math.round(Number(n ?? 0)).toLocaleString("es-CO")}`;
 

@@ -1,7 +1,7 @@
 // Verifica el acceso al Drive y muestra un resumen de la carpeta raíz sin
 // descargar nada. Uso: npm run probar-drive
-import { ClienteDrive } from "../src/modules/contabilidad/drive/cliente";
-import { inferirPeriodoCarpeta } from "../src/modules/contabilidad/core";
+import { ClienteDrive } from "../drive/cliente";
+import { inferirPeriodoCarpeta } from "../core";
 
 async function main() {
   const raiz = process.env.DRIVE_ROOT_FOLDER_ID!;

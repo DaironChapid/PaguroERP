@@ -4,7 +4,7 @@
 //   pendiente_revision (por defecto) · aprobada · descartada   → por estado
 //   24,43                                                       → por número de documento
 //   clase:transferencia,pago_nomina                             → por clase de documento
-import { crearClienteServicio } from "../src/modules/contabilidad/repo/supabase";
+import { crearClienteServicio } from "../repo/supabase";
 
 async function main() {
   const filtro = process.argv[2] ?? "pendiente_revision";

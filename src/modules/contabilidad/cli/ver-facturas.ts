@@ -1,6 +1,6 @@
 // Muestra un resumen de las últimas facturas registradas, con sus hallazgos.
 // Uso: npm run ver-facturas -- [cantidad=10] [estado]
-import { crearClienteServicio } from "../src/modules/contabilidad/repo/supabase";
+import { crearClienteServicio } from "../repo/supabase";
 
 async function main() {
   const db = crearClienteServicio();

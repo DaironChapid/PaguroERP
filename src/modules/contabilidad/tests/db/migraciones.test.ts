@@ -6,7 +6,7 @@ import { PGlite } from "@electric-sql/pglite";
 import { beforeAll, describe, expect, it } from "vitest";
 import { cuentasDesdeConfig, generarAsiento } from "@/modules/contabilidad/core";
 
-const MIGRACIONES = join(__dirname, "..", "..", "supabase", "migrations");
+const MIGRACIONES = join(__dirname, "..", "..", "..", "..", "..", "supabase", "migrations");
 
 const STUB_SUPABASE = `
   create role anon nologin;

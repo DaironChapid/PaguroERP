@@ -41,9 +41,9 @@ Guía para recibir el proyecto desde GitHub, ponerlo a funcionar en otro computa
 | Node.js | 24 (LTS) | `node -v` |
 | Git | cualquiera reciente | `git --version` |
 | Google Cloud CLI | cualquiera reciente | `gcloud --version` |
-| Microsoft Edge | el de Windows | Solo para las capturas y los PDF de la documentación |
+| Microsoft Edge | el de Windows | Solo para generar los PDF de la documentación |
 
-El sistema está probado en **Windows 11**. En Mac o Linux funciona igual, salvo `iniciar-paguro.bat` (usar `npm start`) y los scripts de capturas y PDF (usan Edge).
+El sistema está probado en **Windows 11**. En Mac o Linux funciona igual, salvo `iniciar-paguro.bat` (usar `npm start`) y el script de PDF (usa Edge).
 
 ## 4. Clonar y configurar
 
@@ -172,12 +172,8 @@ Pide la contraseña en la terminal. Roles: `admin` (todo), `editor` (revisar y a
 | `npm test` | Nada | 120 pruebas de reglas contables y de las migraciones (en una base de datos en memoria) |
 | `npm run typecheck` · `npm run lint` | Nada | Tipos y estilo del código |
 | `npm run verificar` · `npm run probar-drive` · `npm run probar-ia` | `.env.local` | Cada conexión externa |
-| `npm run prueba:interfaz` | App encendida | Todas las pantallas, permisos por rol y los enlaces de los 9 reportes |
-| `npm run prueba:flujo` | App encendida | Corregir, aprobar, reabrir y rechazar un documento de prueba; asiento cuadrado y saldos iniciales |
 
-Las dos últimas crean un usuario y un documento de prueba **temporales** y los borran al final, aunque fallen. Si la app no está en el puerto 3000, indica la dirección antes del comando: `set URL_APP=http://localhost:3200` (cmd) o `$env:URL_APP="http://localhost:3200"` (PowerShell).
-
-> Verificado el 21-nov-2026 sobre un **clon limpio** del repositorio: `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build`, `npm start`, `prueba:interfaz` y `prueba:flujo` pasan.
+> Verificado sobre un **clon limpio** del repositorio: `npm ci`, `npm test`, `npm run typecheck`, `npm run lint`, `npm run build` y `npm start` pasan.
 
 ---
 
@@ -231,9 +227,9 @@ npm ci
 npm run build
 ```
 
-Luego cierra la ventana de `iniciar-paguro.bat`, vuelve a abrirla y corre `npm run prueba:interfaz` y `npm run prueba:flujo`.
+Luego cierra la ventana de `iniciar-paguro.bat` y vuelve a abrirla.
 
-**Si el manual o el documento técnico cambian:** con la app encendida, `npm run capturas:manual`, `npm run manual:pdf` y `npm run tecnico:pdf`.
+**Si el manual o el documento técnico cambian:** edita su `.html` en `docs/` y corre `npm run manual:pdf` y `npm run tecnico:pdf` (las capturas del manual se reemplazan a mano en `docs/manual/capturas/`).
 
 ## 13. Crear el repositorio en GitHub (una sola vez)
 

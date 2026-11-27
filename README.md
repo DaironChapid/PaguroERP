@@ -12,7 +12,7 @@ ERP interno de **Paguro Corp**. Hoy tiene un módulo, **Contabilidad**: lee los 
 | [`docs/INSTALACION.md`](docs/INSTALACION.md) | Quien instala o desarrolla | Clonar, configurar, conectar los servicios, probar, publicar cambios |
 | [`docs/manual/Manual-de-uso-Paguro-ERP.pdf`](docs/manual/Manual-de-uso-Paguro-ERP.pdf) | Quien usa el sistema | Uso diario, con capturas |
 | [`docs/ESTADO.md`](docs/ESTADO.md) | Equipo | Qué está hecho, decisiones contables y pendientes |
-| [`docs/PLAN.md`](docs/PLAN.md) | Equipo | Plan y decisiones originales (fase 1) |
+| [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md) | Quien desarrolla | Estructura modular, reglas y cómo agregar un módulo |
 
 ## Inicio rápido
 
@@ -31,7 +31,7 @@ Para usarlo a diario (versión de producción): `npm run build` y luego `iniciar
 
 ## Tecnologías
 
-Next.js 16 (App Router, React 19, TypeScript, Tailwind CSS 4) · Supabase (PostgreSQL, Auth, RLS) · Claude API (Anthropic) · Google Drive API · Vitest y PGlite (pruebas) · Playwright (capturas y PDF).
+Next.js 16 (App Router, React 19, TypeScript, Tailwind CSS 4) · Supabase (PostgreSQL, Auth, RLS) · Claude API (Anthropic) · Google Drive API · Vitest y PGlite (pruebas) · Playwright (PDF de la documentación).
 
 ## Organización del código
 
@@ -50,16 +50,20 @@ src/
 │  ├─ repo/             Conexión a Supabase y tipos de la base de datos
 │  ├─ api/              Lógica de los endpoints y consultas de las páginas
 │  ├─ ui/               Componentes de las pantallas
+│  ├─ cli/              Herramientas de terminal (npm run …)
+│  ├─ tests/            Pruebas automáticas del módulo
 │  ├─ modulo.ts         Manifiesto del módulo (lo que el ERP muestra en el menú)
 │  └─ rutas.ts          Rutas del módulo
 ├─ instrumentation.ts   Arranca la sincronización automática con el servidor
 └─ proxy.ts             Refresca la sesión y protege las páginas
 supabase/migrations/    Base de datos: tablas, vistas, permisos (RLS), datos iniciales
-scripts/                Herramientas de terminal (procesar, respaldar, probar…)
-tests/                  Pruebas automáticas
+docs/                   Manual, documento técnico, instalación, arquitectura y estado
+scripts/                Herramientas generales (PDF de la documentación)
 ```
 
 ### Agregar un módulo nuevo al ERP
+
+Guía completa y reglas: [`docs/ARQUITECTURA.md`](docs/ARQUITECTURA.md).
 
 1. Crear `src/modules/<modulo>/` con su `modulo.ts` (manifiesto: nombre, ítems del menú) y `rutas.ts`. Tomar `contabilidad` como modelo.
 2. Registrar el manifiesto en `src/erp/modulos.ts`.
@@ -75,7 +79,6 @@ tests/                  Pruebas automáticas
 | `npm run build` / `npm start` | Compilar y encender la versión de producción |
 | `npm test` | Pruebas de la lógica contable y de las migraciones (no necesita `.env.local`) |
 | `npm run typecheck` / `npm run lint` | Tipos y estilo del código |
-| `npm run prueba:interfaz` / `npm run prueba:flujo` | Pruebas de pantallas y del flujo completo (con la app encendida) |
 | `npm run verificar` / `npm run probar-drive` / `npm run probar-ia` | Verificar la conexión con Supabase, Drive y Claude |
 | `npm run respaldo` | Copia de los datos contables en `respaldos/` (no se sube al repositorio) |
 | `npm run acceso -- correo rol "Nombre"` | Crear un usuario o cambiar su rol (admin, editor, lector) |

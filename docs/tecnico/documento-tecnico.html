@@ -310,7 +310,7 @@ Robot lector-facturas  ── permiso Lector ──▶  Carpeta 02_2026
     <li>Entregar <code>.env.local</code> por un canal seguro, con la clave nueva de Claude de la empresa.</li>
     <li>En el PC de destino: instalar Node 24, Git y Google Cloud CLI; clonar; <code>npm ci</code>; copiar <code>.env.local</code>; <code>npm run build</code>.</li>
     <li>Iniciar sesión de Google y comprobar las tres conexiones: <code>npm run verificar</code>, <code>probar-drive</code> y <code>probar-ia</code>.</li>
-    <li>Crear el usuario administrador, encender con <code>iniciar-paguro.bat</code> y correr <code>prueba:interfaz</code> y <code>prueba:flujo</code>.</li>
+    <li>Crear el usuario administrador, encender con <code>iniciar-paguro.bat</code> y abrir el sistema y revisar las pantallas.</li>
     <li>Ajustar el control de sesión de Google y confirmar la titularidad de las cuentas.</li>
   </ol>
 </section>
@@ -328,9 +328,10 @@ src/modules/contabilidad/
   services/   Procesos: sincronizar, procesar, revisar, reloj automático
   repo/       Conexión a Supabase y tipos generados de la base de datos
   api/ ui/    Lógica de endpoints y consultas · componentes de pantalla
+  cli/ tests/ Herramientas de terminal · pruebas automáticas del módulo
   modulo.ts   Manifiesto: lo que el ERP muestra en el menú
 supabase/migrations/  Toda la base de datos, versionada (tablas, vistas, RLS, datos iniciales)
-scripts/ tests/       Herramientas de terminal · pruebas automáticas</pre>
+docs/                 Manual, documento técnico, instalación y arquitectura</pre>
   <p>Regla de la arquitectura: <b>las reglas de negocio van en <code>core/</code></b> (fáciles de probar y de llevar a otro sistema); las rutas solo conectan pantallas con servicios.</p>
 
   <h3>Agregar un módulo (por ejemplo, Inventario)</h3>
@@ -338,7 +339,7 @@ scripts/ tests/       Herramientas de terminal · pruebas automáticas</pre>
     <li>Crear <code>src/modules/inventario/</code> con su <code>modulo.ts</code> y <code>rutas.ts</code>, tomando Contabilidad como modelo, y registrarlo en <code>src/erp/modulos.ts</code>. Aparece solo en el menú.</li>
     <li>Páginas en <code>src/app/(erp)/inventario/</code> y endpoints en <code>src/app/api/inventario/</code>.</li>
     <li>Datos: una migración nueva con su propio schema (<code>inventario</code>), RLS y permisos por rol; exponer el schema en la configuración de Supabase.</li>
-    <li>Pruebas en <code>tests/</code> y, si tiene ajustes, una sección en <i>Configuración</i>.</li>
+    <li>Pruebas en <code>src/modules/&lt;modulo&gt;/tests/</code> y, si tiene ajustes, una sección en <i>Configuración</i>.</li>
   </ol>
 
   <h3>Desarrollar sin afectar la contabilidad real</h3>
@@ -351,7 +352,7 @@ scripts/ tests/       Herramientas de terminal · pruebas automáticas</pre>
   <h3>Publicar cambios</h3>
   <pre>Desarrollo:  rama → cambios → npm test, typecheck, lint → Pull Request → main
 Producción:  git pull → npm ci → (migraciones: respaldo → dry-run → push) → npm run build
-             → reiniciar iniciar-paguro.bat → prueba:interfaz y prueba:flujo</pre>
+             → reiniciar iniciar-paguro.bat</pre>
 </section>
 
 <section class="sigue">

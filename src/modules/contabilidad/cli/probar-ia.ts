@@ -4,7 +4,7 @@
 import { readFileSync } from "node:fs";
 import { extname } from "node:path";
 import { createClient } from "@supabase/supabase-js";
-import { crearExtractor, ErrorExtraccion } from "../src/modules/contabilidad/ai";
+import { crearExtractor, ErrorExtraccion } from "../ai";
 
 function pdfDeEjemplo(lineas: string[]): Buffer {
   const texto = lineas

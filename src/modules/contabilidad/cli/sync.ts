@@ -1,5 +1,5 @@
 // Inventario del Drive (sin IA). Uso: npm run sync
-import { sincronizarDrive } from "../src/modules/contabilidad/services/lote";
+import { sincronizarDrive } from "../services/lote";
 
 async function main() {
   console.log("Recorriendo el Drive…");
